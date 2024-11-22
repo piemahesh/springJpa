@@ -28,6 +28,7 @@ public class UserController {
 			User findedUser = userRepo.findById(user.getId()).get();
 			System.out.println(findedUser + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 //			return {"message:" + "user is already present"};
+			System.out.println("hi");
 		} catch (NoSuchElementException e) {
 			userRepo.save(user);
 			return user;
