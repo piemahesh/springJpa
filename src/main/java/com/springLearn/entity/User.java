@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class User {
 	
 	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 	private String name;
 	private Integer model;
