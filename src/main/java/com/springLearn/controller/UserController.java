@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.springLearn.entity.User;
 import com.springLearn.repository.UserRepo;
+import com.springLearn.util.PasswordHashing;
 
 @Controller
 @RequestMapping("/api")
@@ -30,9 +31,9 @@ public class UserController {
 		try {
 			User userll = getUserById(user.getId());
 			System.out.println(userll);
-			if(userll == null) {
+			if (userll == null) {
 				System.out.println("user is created");
-			}else {
+			} else {
 				System.out.println("user is already present");
 			}
 //			User findedUser = userRepo.findById(user.getId()).get();
@@ -56,7 +57,7 @@ public class UserController {
 	@ResponseBody
 	public Iterable<User> getAllUser() {
 		Iterable<User> userList = userRepo.findAll();
-		for(User userfromDb:userList) {
+		for (User userfromDb : userList) {
 			System.out.println(userfromDb.toString());
 			System.out.println("==============================================");
 		}
@@ -77,4 +78,18 @@ public class UserController {
 		return null;
 	}
 
+	@PostMapping("/createPasswords")
+	@ResponseBody
+	public String createPassword(@RequestBody String plainPassword) {
+		String hasedPassword = PasswordHashing.hashPassword(plainPassword);
+		System.out.println("hashed password is " + hasedPassword);
+		return hasedPassword;
+	}
+
+	@GetMapping("/checkPassword")
+	@ResponseBody
+	public boolean checkPassword(@RequestParam String password,@RequestParam String oldPassword) {
+		
+		return PasswordHashing.verifyPassword(password, oldPassword);
+	}
 }
