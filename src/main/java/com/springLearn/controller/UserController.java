@@ -89,7 +89,6 @@ public class UserController {
 	@GetMapping("/checkPassword")
 	@ResponseBody
 	public boolean checkPassword(@RequestParam String password,@RequestParam String oldPassword) {
-		
 		return PasswordHashing.verifyPassword(password, oldPassword);
 	}
 }
