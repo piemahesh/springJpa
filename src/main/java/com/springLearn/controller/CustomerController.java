@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springLearn.entity.User;
+import com.springLearn.util.JwtUtil;
 
 @RestController
 @RequestMapping("/api")
 public class CustomerController {
+	
+
+	
+	
 
 	@PostMapping("/create/customer")
 	public ResponseEntity<User> getCustemer(@RequestBody User user) {
@@ -22,6 +27,7 @@ public class CustomerController {
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody String password) {
 		if (password.equals("sujitha")) {
+			
 			return new ResponseEntity<String>("this user is present", HttpStatus.ACCEPTED);
 		}
 		return new ResponseEntity<String>("this user is not present", HttpStatus.BAD_REQUEST);
